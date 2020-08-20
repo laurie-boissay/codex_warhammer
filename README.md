@@ -1,5 +1,5 @@
 # codex_warhammer
-A program to help you creating a Blood Angels army list for Warhammer 4k.
+A program to help you creating a Blood Angels army list for Warhammer 40k.
 
 WORK IN PROGRESS.
 
