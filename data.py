@@ -184,6 +184,11 @@ var_name = {}
 
 variable_name = {}
 
+new_variable_name = {}
+
 choosen_units_value = []
 
 choosen_units_name = []
+
+choosen_units = {}
+

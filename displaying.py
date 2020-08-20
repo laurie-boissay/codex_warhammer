@@ -116,7 +116,6 @@ class Application(tk.Frame):
         self.button_check_choosen()
         
 
-
     def frame_owned_label(self):
         self.label = tk.Label(
             self.frame3,
@@ -136,10 +135,9 @@ class Application(tk.Frame):
         
         for k, v in choice.items():
             label_text = v[0]
-            Checkbutton_text = v[1] + " : " + str(v[2])
+            Checkbutton_text = label_text + " : " + v[1] + " : " + str(v[2])
 
             variable_name[k] = tk.IntVar()
-            self.choose_unit_label(label_text)
             self.checkbutton_choose_unit(Checkbutton_text, k, v[2])
 
         self.button_add_choice()
@@ -170,7 +168,7 @@ class Application(tk.Frame):
         self.button_add = tk.Button(
             self.frame3,
             text="Ajouter",
-            command=self.display_total_value,
+            command=self.display_name_value_unit,
             )
         self.button_add.pack()
 
@@ -203,22 +201,36 @@ class Application(tk.Frame):
         self.label.pack(padx=10, pady=10, side="top")
 
 
-    def display_total_value(self):
-        # Work in progress.
+    def display_name_value_unit(self):
         self.display_frame_choosen()
         get_variable_name()
 
-        power = 0
-        for value in choosen_units_value:
-            power += value
-        self.total_power(str(power))
+        power = count_power()
+        self.label_frame_del_unit(str(power))
         
         self.display_label_frame_choosen("Unités selectionnées : ")
         for name in choosen_units_name:
-                self.total_power(name)
+            for k, v in choosen_units.items():
+                if name == k :
+                    new_variable_name[k] = tk.IntVar()
+                    len_value_unit = v[0] + " : " + v[1] + " " + str(v[2])
+                    self.checkbutton_del_unit(len_value_unit, k, v[2])
+
+        self.button_del_choice()
+
+
+    def checkbutton_del_unit(self, text, key, value):
+        self.bouton_del = tk.Checkbutton(
+            self.frame4,
+            text=text,
+            bg=self.title_color,
+            variable=new_variable_name[key],
+            onvalue=value,
+            )
+        self.bouton_del.pack()
                 
     
-    def total_power(self, text):
+    def label_frame_del_unit(self, text):
         self.label = tk.Label(
             self.frame4,
             text=text,
@@ -226,6 +238,37 @@ class Application(tk.Frame):
             bg=self.title_color,
             )
         self.label.pack(padx=10, pady=10, side="top")
+
+
+    def button_del_choice(self):
+        self.button_del = tk.Button(
+            self.frame4,
+            text="Supprimer",
+            command=self.del_name_value_unit,
+            )
+        self.button_del.pack()
+
+
+    def del_name_value_unit(self):
+        print("A configurer.")
+
+        """
+        self.display_frame_choosen()
+        get_variable_name()
+
+        power = count_power()
+        self.label_frame_del_unit(str(power))
+        
+        self.display_label_frame_choosen("Unités selectionnées : ")
+        for name in choosen_units_name:
+            for k, v in choosen_units.items():
+                if name == k :
+                    new_variable_name[k] = tk.IntVar()
+                    len_value_unit = v[0] + " : " + v[1] + " " + str(v[2])
+                    self.checkbutton_del_unit(len_value_unit, k, v[2])
+
+        self.button_del_choice()
+        """
 
 
     ######## LAST FRAME #####################################################################

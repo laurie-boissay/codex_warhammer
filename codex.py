@@ -23,6 +23,7 @@ This program help you to create a Blood Angels army list for Warhammer 4k.
 
 - select the figurines you have ;
 - select the figurines you want to play ;
+- count the power value ;
 - get a file with all unit profiles you need.
 
 This program is a work to progress.

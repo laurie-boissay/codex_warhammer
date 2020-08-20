@@ -21,19 +21,30 @@ def get_variable_name():
             choosen_units_name.append(k)
 
 
+def get_new_variable_name():
+    for k in variable_name.keys():
+        if variable_name[k].get() != 0:
+            choosen_units_value.append(variable_name[k].get())
+
+    for k, v in variable_name.items():
+        if variable_name[k].get() != 0:
+            choosen_units_name.append(k)
+
+
 def choice_owned_units():
     # k = var_name
     # v[0] = unit name
     # v[1] = "escouade complète"/"demie-escouade"
     # v[2] = value
+
     choice = {}
+
     try:
         list_owned_units = read_an_object("user/owned_units")
     except FileNotFoundError:
         list_owned_units = read_an_object("owned_units")
     
     for k, v in list_owned_units.items():
-        
         for key, value in units.items():
             if v: # figurine is owned.
                 if k == key : # not doubles.
@@ -49,7 +60,16 @@ def choice_owned_units():
                     else:
                         choice[var_name] = (k, "escouade complète", value[1][1])
 
+    for k, v in choice.items():
+        choosen_units[k] = v
     return choice
+ 
+
+def count_power():
+    power = 0
+    for value in choosen_units_value:
+        power += value
+    return power
 
 
 
