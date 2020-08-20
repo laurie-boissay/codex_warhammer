@@ -5,6 +5,7 @@ WORK IN PROGRESS.
 
 - select the figurines you have ;
 - select the figurines you want to play ;
+- count the power value ;
 - get a file with all unit profiles you need.
 
 Tkinter interface.
