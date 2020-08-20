@@ -4,6 +4,7 @@
 ###### RESSOURCES ###########################################################
 # https://docs.python.org/3/library/tkinter.html
 # https://python.doctor/page-tkinter-interface-graphique-python-tutoriel
+# https://www.tutorialspoint.com/python/tk_checkbutton.htm
 
 
 import tkinter as tk
@@ -18,7 +19,7 @@ from displaying import Application
 
 
 """
-This programe help you to create a Blood Angels army list for Warhammer 4k.
+This program help you to create a Blood Angels army list for Warhammer 4k.
 
 - select the figurines you have ;
 - select the figurines you want to play ;
@@ -27,8 +28,6 @@ This programe help you to create a Blood Angels army list for Warhammer 4k.
 This program is a work to progress.
 
 """
-
-
 
 def main_loop():
     create_user_folder()

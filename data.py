@@ -184,4 +184,6 @@ var_name = {}
 
 variable_name = {}
 
-list_choosen_units = {}
+choosen_units_value = []
+
+choosen_units_name = []

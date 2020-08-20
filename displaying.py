@@ -114,13 +114,13 @@ class Application(tk.Frame):
 
         self.frame_owned_label()
         self.button_check_choosen()
-
+        
 
 
     def frame_owned_label(self):
         self.label = tk.Label(
             self.frame3,
-            text="Vos unités : ",
+            text="Choisissez vos unités : ",
             fg="red",
             bg=self.title_color,
             )
@@ -128,49 +128,51 @@ class Application(tk.Frame):
 
         
     def button_check_choosen(self):
-        try:
-            list_owned_units = read_an_object("user/owned_units")
-        except FileNotFoundError:
-            list_owned_units = read_an_object("owned_units")
+        choice = choice_owned_units()
+        # k = var_name
+        # v[0] = unit name
+        # v[1] = "escouade complète"/"demie-escouade"
+        # v[2] = value
         
-        for k, v in list_owned_units.items():
-            text  = ""
-            for key, value in units.items():
-                if v:
-                    if k == key :
-                        variable_name[k] = tk.IntVar()
-                        text += k + " : "
-                        text += value[0]
+        for k, v in choice.items():
+            label_text = v[0]
+            Checkbutton_text = v[1] + " : " + str(v[2])
 
-                        if value[1][0] != value[1][1]:
-                            text += " ; de "
-                            text += str(value[1][0]) + " à "
-                            text += str(value[1][1]) + " rangs."
-                            self.checkbutton_choose_unit(text, key)
-                        else:
-                            text += " ; " + str(value[1][0]) + " rangs."
-                            self.checkbutton_choose_unit(text, key)
+            variable_name[k] = tk.IntVar()
+            self.choose_unit_label(label_text)
+            self.checkbutton_choose_unit(Checkbutton_text, k, v[2])
 
-        self.button_validate_choice()
+        self.button_add_choice()
+
+
+    def choose_unit_label(self, text):
+        self.label = tk.Label(
+            self.frame3,
+            text=text,
+            fg="black",
+            bg=self.title_color,
+            )
+        self.label.pack(padx=10, pady=10, side="top")
 
                         
-    def checkbutton_choose_unit(self, text, key):
-        self.bouton_2 = tk.Checkbutton(
+    def checkbutton_choose_unit(self, text, key, value):
+        self.bouton_choose = tk.Checkbutton(
             self.frame3,
             text=text,
             bg=self.title_color,
             variable=variable_name[key],
+            onvalue=value,
             )
-        self.bouton_2.pack()
+        self.bouton_choose.pack()
 
 
-    def button_validate_choice(self):
-        self.button_validate = tk.Button(
+    def button_add_choice(self):
+        self.button_add = tk.Button(
             self.frame3,
-            text="Valider",
+            text="Ajouter",
             command=self.display_total_value,
             )
-        self.button_validate.pack()
+        self.button_add.pack()
 
 
     ######## FRAME CHOSEEN #####################################################################
@@ -188,13 +190,13 @@ class Application(tk.Frame):
             )
         self.frame4.pack(side="right", padx=30, pady=30)
 
-        self.display_label_frame_choosen()
+        self.display_label_frame_choosen("Puissance totale : ")
 
 
-    def display_label_frame_choosen(self):
+    def display_label_frame_choosen(self, text):
         self.label = tk.Label(
             self.frame4,
-            text="Puissance totale : ",
+            text=text,
             fg="red",
             bg=self.title_color,
             )
@@ -202,17 +204,24 @@ class Application(tk.Frame):
 
 
     def display_total_value(self):
-        get_variable_name()
+        # Work in progress.
         self.display_frame_choosen()
+        get_variable_name()
+
         power = 0
-        for k, v in list_choosen_units.items():
-            for key, value in units.items():
-                if v and k == key:
-                    power += value[1][1]
+        for value in choosen_units_value:
+            power += value
+        self.total_power(str(power))
         
+        self.display_label_frame_choosen("Unités selectionnées : ")
+        for name in choosen_units_name:
+                self.total_power(name)
+                
+    
+    def total_power(self, text):
         self.label = tk.Label(
             self.frame4,
-            text=str(power),
+            text=text,
             fg="black",
             bg=self.title_color,
             )
