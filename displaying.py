@@ -66,12 +66,12 @@ class Application(tk.Frame):
     
     def button_check_owned(self):
         for k in units.keys():
-            var_name[k] = tk.IntVar()
+            owned_var_name[k] = tk.IntVar()
             self.bouton = tk.Checkbutton(
                 self.frame2,
                 text=k,
                 bg=self.title_color,
-                variable=var_name[k],
+                variable=owned_var_name[k],
                 )
             self.bouton.pack()
 
@@ -83,7 +83,7 @@ class Application(tk.Frame):
         self.button_save_owned = tk.Button(
             self.frame2,
             text="Sauver",
-            command=get_var_name,
+            command=get_owned_var_name,
             )
         self.button_save_owned.pack(side="left")
 
@@ -128,7 +128,7 @@ class Application(tk.Frame):
         
     def button_check_choosen(self):
         choice = choice_owned_units()
-        # k = var_name
+        # k = owned_var_name
         # v[0] = unit name
         # v[1] = "escouade complète"/"demie-escouade"
         # v[2] = value
@@ -137,7 +137,7 @@ class Application(tk.Frame):
             label_text = v[0]
             Checkbutton_text = label_text + " : " + v[1] + " : " + str(v[2])
 
-            variable_name[k] = tk.IntVar()
+            add_var_name[k] = tk.IntVar()
             self.checkbutton_choose_unit(Checkbutton_text, k, v[2])
 
         self.button_add_choice()
@@ -158,7 +158,7 @@ class Application(tk.Frame):
             self.frame3,
             text=text,
             bg=self.title_color,
-            variable=variable_name[key],
+            variable=add_var_name[key],
             onvalue=value,
             )
         self.bouton_choose.pack()
@@ -173,7 +173,7 @@ class Application(tk.Frame):
         self.button_add.pack()
 
 
-    ######## FRAME CHOSEEN #####################################################################
+    ######## FRAME CHOOSEN #####################################################################
     def display_frame_choosen(self):
         try :
             self.frame4.pack_forget()
@@ -203,7 +203,7 @@ class Application(tk.Frame):
 
     def display_name_value_unit(self):
         self.display_frame_choosen()
-        get_variable_name()
+        get_add_var_name()
 
         power = count_power()
         self.label_frame_del_unit(str(power))
@@ -212,7 +212,7 @@ class Application(tk.Frame):
         for name in choosen_units_name:
             for k, v in choosen_units.items():
                 if name == k :
-                    new_variable_name[k] = tk.IntVar()
+                    del_var_name[k] = tk.IntVar()
                     len_value_unit = v[0] + " : " + v[1] + " " + str(v[2])
                     self.checkbutton_del_unit(len_value_unit, k, v[2])
 
@@ -224,7 +224,7 @@ class Application(tk.Frame):
             self.frame4,
             text=text,
             bg=self.title_color,
-            variable=new_variable_name[key],
+            variable=del_var_name[key],
             onvalue=value,
             )
         self.bouton_del.pack()
@@ -250,25 +250,32 @@ class Application(tk.Frame):
 
 
     def del_name_value_unit(self):
-        print("A configurer.")
-
-        """
         self.display_frame_choosen()
-        get_variable_name()
+        self.get_del_var_name()
 
         power = count_power()
         self.label_frame_del_unit(str(power))
         
         self.display_label_frame_choosen("Unités selectionnées : ")
+        del_var_name =  {}
         for name in choosen_units_name:
             for k, v in choosen_units.items():
                 if name == k :
-                    new_variable_name[k] = tk.IntVar()
+                    del_var_name[k] = tk.IntVar()
                     len_value_unit = v[0] + " : " + v[1] + " " + str(v[2])
                     self.checkbutton_del_unit(len_value_unit, k, v[2])
 
         self.button_del_choice()
-        """
+
+
+    def get_del_var_name(self):
+        for k, v in del_var_name.items():
+            if del_var_name[k].get() != 0:                
+                try: # Work in progress.
+                    choosen_units_name.remove(k)
+                    choosen_units_value.remove(del_var_name[k].get())
+                except ValueError:
+                    pass
 
 
     ######## LAST FRAME #####################################################################

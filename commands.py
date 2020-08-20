@@ -5,29 +5,16 @@ from data import *
 from file_management import save_an_object, read_an_object
 
 
-def get_var_name():
-    for k in var_name.keys():
-        list_owned_units[k] = var_name[k].get()
+def get_owned_var_name():
+    for k in owned_var_name.keys():
+        list_owned_units[k] = owned_var_name[k].get()
     save_an_object(list_owned_units, "owned_units")
 
 
-def get_variable_name():
-    for k in variable_name.keys():
-        if variable_name[k].get() != 0:
-            choosen_units_value.append(variable_name[k].get())
-
-    for k, v in variable_name.items():
-        if variable_name[k].get() != 0:
-            choosen_units_name.append(k)
-
-
-def get_new_variable_name():
-    for k in variable_name.keys():
-        if variable_name[k].get() != 0:
-            choosen_units_value.append(variable_name[k].get())
-
-    for k, v in variable_name.items():
-        if variable_name[k].get() != 0:
+def get_add_var_name():
+    for k in add_var_name.keys():
+        if add_var_name[k].get() != 0:
+            choosen_units_value.append(add_var_name[k].get())
             choosen_units_name.append(k)
 
 

@@ -176,19 +176,21 @@ weapon_characteristics = {
 }# End weapon_characteristics # # # # # # # # # # # # # # # # # # #
 
 
-army_power = []
+owned_var_name = {}
+
+add_var_name = {}
+
+del_var_name = {}
+
 
 list_owned_units = {}
 
-var_name = {}
+choosen_units = {}
 
-variable_name = {}
-
-new_variable_name = {}
 
 choosen_units_value = []
 
 choosen_units_name = []
 
-choosen_units = {}
+
 
